@@ -9,32 +9,25 @@ const SearchBook = () => {
 	const [query, setQuery] = useState("");
 
 	useEffect(() => {
-		let isMounted = true; // Track if the component is mounted
-
 		const searchBooks = async () => {
 			if (query.trim()) {
 				try {
 					const results = await search(query, 20);
-					if (isMounted) {
-						// Only update state if mounted
-						setBooks(Array.isArray(results) ? results : []);
-					}
-				} catch (error) {
-					if (isMounted) {
-						console.error("Error searching books:", error);
+					if (Array.isArray(results)) {
+						setBooks(results);
+					} else {
 						setBooks([]);
 					}
+				} catch (error) {
+					console.error("Error searching books:", error);
+					setBooks([]);
 				}
-			} else if (isMounted) {
+			} else {
 				setBooks([]);
 			}
 		};
 
 		searchBooks();
-
-		return () => {
-			isMounted = false; // Cleanup to set flag false on unmount
-		};
 	}, [query]);
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {

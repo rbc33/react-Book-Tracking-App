@@ -2,7 +2,7 @@ export type Book = {
 	id?: string;
 	title: string;
 	authors?: string[];
-	imageLinks: {
+	imageLinks?: {
 		thumbnail: string;
 	};
 	shelf: string;

@@ -7,32 +7,25 @@ type BookShelfProps = {
 };
 const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 	const [books, setBooks] = useState<Book[]>([]);
-	const [hasChanged, setHasChanged] = useState(false);
 
 	useEffect(() => {
-		let isMounted = true;
-
 		const getBooks = async () => {
 			try {
 				const apiBooks = await getAll();
-				if (isMounted && apiBooks) {
-					setBooks(Array.isArray(apiBooks) ? apiBooks : []);
+				if (apiBooks !== undefined) {
+					setBooks(apiBooks);
 				}
 			} catch (error) {
-				if (isMounted) {
-					console.error("Error fetching books:", error);
-					setBooks([]);
-				}
+				console.error("Error fetching books:", error);
 			}
 		};
 
 		getBooks();
-
-		return () => {
-			isMounted = false;
-		};
-	}, [hasChanged]);
-
+		// }, [hasChanged]);
+	}, []);
+	const handleChange = (book: Book) => {
+		setBooks([...books.filter((b) => b.id !== book.id), book]);
+	};
 	return (
 		<>
 			{shelfs.map((shelf) => (
@@ -42,7 +35,7 @@ const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 						<List
 							shelfVal={shelf.value}
 							books={books}
-							onChange={() => setHasChanged(!hasChanged)}
+							onChange={(book) => handleChange(book)}
 						/>
 					</div>
 				</div>

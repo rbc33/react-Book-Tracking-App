@@ -1,17 +1,20 @@
-import { Shelf } from "./Constraints";
+import { update } from "./BooksAPI";
+import { Book, Shelf } from "./Constraints";
 
 type BookChangerProps = {
 	shelfs: Shelf[];
-	handleChange: (s: string) => void;
+	book: Book;
+	onChange: (book: Book) => void;
 };
 
-const BookChanger = ({ shelfs, handleChange }: BookChangerProps) => {
-	// const onChange = (val: string) => {
-	// 	update(bookID, val);
-	// };
+const BookChanger = ({ shelfs, book, onChange }: BookChangerProps) => {
+	const handleChange = (val: string) => {
+		update(book.id!, val).then(() => onChange({ ...book, shelf: val }));
+	};
 	return (
 		<div className="book-shelf-changer">
 			<select
+				value={book.shelf}
 				onChange={(e) => {
 					handleChange(e.target.value);
 				}}
