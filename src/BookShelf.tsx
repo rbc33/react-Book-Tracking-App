@@ -10,21 +10,26 @@ const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 	const [hasChanged, setHasChanged] = useState(false);
 
 	useEffect(() => {
+		let isMounted = true;
+
 		const getBooks = async () => {
 			try {
 				const apiBooks = await getAll();
-				if (apiBooks !== undefined) {
-					setBooks(apiBooks);
+				if (isMounted && apiBooks) {
+					setBooks(Array.isArray(apiBooks) ? apiBooks : []);
 				}
 			} catch (error) {
-				console.error("Error fetching books:", error);
+				if (isMounted) {
+					console.error("Error fetching books:", error);
+					setBooks([]);
+				}
 			}
 		};
 
 		getBooks();
 
 		return () => {
-			// Cleanup if needed
+			isMounted = false;
 		};
 	}, [hasChanged]);
 
