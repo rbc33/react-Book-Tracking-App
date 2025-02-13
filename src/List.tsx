@@ -20,10 +20,9 @@ const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
 		<ol className="books-grid">
 			{books.map((book) => (
 				<li key={book.id}>
-					<div key={`${book.id}-book`} className="book">
-						<div key={`${book.id}-top`} className="book-top">
+					<div className="book">
+						<div className="book-top">
 							<div
-								key={`${book.id}-cover`}
 								className="book-cover"
 								style={{
 									width: 128,
@@ -36,12 +35,8 @@ const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
 								handleChange={(val) => handleChange(book.id!, val)}
 							/>
 						</div>
-						<div key={`${book.id}-title`} className="book-title">
-							{book.title}
-						</div>
-						<div key={`${book.id}-authors`} className="book-authors">
-							{book.authors?.map((a) => a)}
-						</div>
+						<div className="book-title">{book.title}</div>
+						<div className="book-authors">{book.authors?.map((a) => a)}</div>
 					</div>
 				</li>
 			))}
