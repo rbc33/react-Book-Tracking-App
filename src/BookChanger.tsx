@@ -18,7 +18,7 @@ const BookChanger = ({ shelfs, book, onChange }: BookChangerProps) => {
 				onChange={(e) => {
 					handleChange(e.target.value);
 				}}
-				defaultValue={"none"}
+				defaultValue={book.shelf}
 			>
 				<option value="none" disabled>
 					Move to...
