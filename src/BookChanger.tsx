@@ -4,12 +4,12 @@ import { Book, Shelf } from "./Constraints";
 type BookChangerProps = {
 	shelfs: Shelf[];
 	book: Book;
-	onChange: (book: Book) => void;
+	onChange: (book: Book, val: string) => void;
 };
 
 const BookChanger = ({ shelfs, book, onChange }: BookChangerProps) => {
 	const handleChange = (val: string) => {
-		update(book.id!, val).then(() => onChange({ ...book, shelf: val }));
+		update(book.id!, val).then(() => onChange(book, val));
 	};
 	return (
 		<div className="book-shelf-changer">

@@ -23,8 +23,11 @@ const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 		getBooks();
 		// }, [hasChanged]);
 	}, []);
-	const handleChange = (book: Book) => {
-		setBooks([...books.filter((b) => b.id !== book.id), book]);
+	const handleChange = (book: Book, val: string) => {
+		setBooks([
+			...books.filter((b) => b.id !== book.id),
+			{ ...book, shelf: val },
+		]);
 	};
 	return (
 		<>
@@ -35,7 +38,7 @@ const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 						<List
 							shelfVal={shelf.value}
 							books={books}
-							onChange={(book) => handleChange(book)}
+							onChange={(book, val) => handleChange(book, val)}
 						/>
 					</div>
 				</div>

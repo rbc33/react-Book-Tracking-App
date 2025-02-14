@@ -3,7 +3,7 @@ import { Book, bookShelfs } from "./Constraints";
 
 type ListBooksProps = {
 	books: Book[];
-	onChange: (book: Book) => void;
+	onChange: (book: Book, val: string) => void;
 	shelfVal?: string;
 };
 const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
@@ -28,7 +28,7 @@ const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
 							<BookChanger
 								shelfs={bookShelfs}
 								book={book}
-								onChange={(book: Book) => onChange(book)}
+								onChange={(book: Book, val: string) => onChange(book, val)}
 							/>
 						</div>
 						<div className="book-title">{book.title}</div>
