@@ -4,7 +4,7 @@ import { Book, bookShelfs } from "./Constraints";
 type ListBooksProps = {
 	books: Book[];
 	onChange: (book: Book, val: string) => void;
-	shelfVal?: string;
+	shelfVal: string;
 };
 const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
 	if (shelfVal) books = books.filter((b) => b.shelf === shelfVal);
@@ -28,6 +28,7 @@ const List = ({ books, shelfVal, onChange }: ListBooksProps) => {
 							<BookChanger
 								shelfs={bookShelfs}
 								book={book}
+								shelfVal={shelfVal}
 								onChange={(book: Book, val: string) => onChange(book, val)}
 							/>
 						</div>

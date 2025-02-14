@@ -21,7 +21,6 @@ const BookShelf = ({ shelfs = bookShelfs }: BookShelfProps) => {
 		};
 
 		getBooks();
-		// }, [hasChanged]);
 	}, []);
 	const handleChange = (book: Book, val: string) => {
 		setBooks([

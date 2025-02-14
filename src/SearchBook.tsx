@@ -93,6 +93,7 @@ const SearchBook = () => {
 					<div className="search-books-input-wrapper">
 						<input
 							type="text"
+							autoFocus
 							placeholder="Search by title, author, or ISBN"
 							value={query}
 							onChange={handleSearchChange}
@@ -103,6 +104,7 @@ const SearchBook = () => {
 					{books && (
 						<List
 							books={books}
+							shelfVal="none"
 							onChange={(book, val) => handleBookShelfChange(book, val)}
 						/>
 					)}
